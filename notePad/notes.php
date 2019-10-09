@@ -11,11 +11,18 @@
     <div class="container mt-5">
     <a href="./" class="btn btn-primary mb-3" type="submit">Back to my notes</a>
     <a href="./" class="btn btn-danger mb-3" type="submit">Delete note</a>
+    <?php 
+        include "settings.php";
+        $noteId = $_GET["id"];
+        $response = $db->prepare("SELECT * FROM notes WHERE id = $noteId");
+        $response->execute();
+        $data = $response->fetch();
+        echo '
         <div class="card">
-            <div class="row">
-                <p class="p-5">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laudantium esse vitae reiciendis, vero nostrum veritatis aliquid repellendus numquam ab. Optio modi cupiditate illo, quaerat consequuntur error provident at omnis corrupti!</p>
-            </div>
-        </div>
+            <h1 class="p-5">'.$data["title"].'</h1>
+            <p class="p-5">'.$data["description"].'</p>
+        </div>'
+    ?>
     </div>
     
 </body>
